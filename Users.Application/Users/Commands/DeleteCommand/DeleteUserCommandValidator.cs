@@ -12,8 +12,6 @@ namespace Users.Application.Users.Commands.DeleteCommand
         public DeleteUserCommandValidator() 
         {
             RuleFor(createUserCommand =>
-                createUserCommand.RoleId).NotEqual(Guid.Empty);
-            RuleFor(createUserCommand =>
                 createUserCommand.Id).NotEqual(Guid.Empty); 
         }
     }

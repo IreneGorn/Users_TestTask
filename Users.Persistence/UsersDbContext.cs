@@ -5,7 +5,7 @@ using Users.Persistence.EntityTypeConfigurations;
 
 namespace Users.Persistence
 {
-    public class UsersDbContext : DbContext, IUsersDbContext
+    public class UsersDbContext : DbContext, IDbContext
     {
         public DbSet<User> Users { get; set; }
 

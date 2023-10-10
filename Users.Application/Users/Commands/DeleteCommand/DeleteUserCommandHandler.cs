@@ -8,9 +8,9 @@ namespace Users.Application.Users.Commands.DeleteCommand
     public class DeleteUserCommandHandler :
         IRequestHandler<DeleteUserCommand>
     {
-        private readonly IUsersDbContext _dbContext;
+        private readonly IDbContext _dbContext;
 
-        public DeleteUserCommandHandler(IUsersDbContext dbContext) =>
+        public DeleteUserCommandHandler(IDbContext dbContext) =>
             _dbContext = dbContext;
 
         public async Task Handle(DeleteUserCommand request,
@@ -19,7 +19,7 @@ namespace Users.Application.Users.Commands.DeleteCommand
             var entity = await _dbContext.Users
                 .FindAsync(new object[] { request.Id }, cancellationToken);
 
-            if (entity == null || entity.RoleId != request.RoleId) 
+            if (entity == null) 
             {
                 throw new NotFoundException(nameof(User), request.Id);
             }

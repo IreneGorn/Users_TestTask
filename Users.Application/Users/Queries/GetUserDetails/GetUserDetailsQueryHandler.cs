@@ -16,10 +16,10 @@ namespace Users.Application.Users.Queries.GetUserDetails
     public class GetUserDetailsQueryHandler
         : IRequestHandler<GetUserDetailsQuery, UserDetailsVm>
     {
-        private readonly IUsersDbContext _dbContext;
+        private readonly IDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetUserDetailsQueryHandler(IUsersDbContext dbContext, IMapper mapper) =>
+        public GetUserDetailsQueryHandler(IDbContext dbContext, IMapper mapper) =>
             (_dbContext, _mapper) = (dbContext, mapper);
 
         public async Task<UserDetailsVm> Handle(GetUserDetailsQuery request, CancellationToken cancellationToken)
@@ -28,7 +28,7 @@ namespace Users.Application.Users.Queries.GetUserDetails
                 .FirstOrDefaultAsync(user =>
                 user.Id == request.Id, cancellationToken);
 
-            if (entity == null || entity.RoleId != request.RoleId) 
+            if (entity == null) 
             {
                 throw new NotFoundException(nameof(User), request.Id);
             }

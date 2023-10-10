@@ -15,7 +15,7 @@ namespace Users.Persistence
             {
                 options.UseSqlite(connectionString);
             });
-            services.AddScoped<IUsersDbContext>(provider => 
+            services.AddScoped<IDbContext>(provider => 
                 provider.GetService<UsersDbContext>());
             return services;
         }

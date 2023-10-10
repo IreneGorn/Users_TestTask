@@ -12,7 +12,6 @@ namespace Users.Application.Users.Queries.GetUserDetails
         public GetUserDetailsQueryValidator()
         {
             RuleFor(user => user.Id).NotEqual(Guid.Empty);
-            RuleFor(user => user.RoleId).NotEqual(Guid.Empty);
         }
     }
 }

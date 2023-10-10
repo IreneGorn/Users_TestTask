@@ -21,7 +21,7 @@ namespace Users.WebApi
             builder.Services.AddAutoMapper(config =>
             {
                 config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
-                config.AddProfile(new AssemblyMappingProfile(typeof(IUsersDbContext).Assembly));
+                config.AddProfile(new AssemblyMappingProfile(typeof(IDbContext).Assembly));
             });
             builder.Services.AddApplication();
             builder.Services.AddPersistence(builder.Configuration);

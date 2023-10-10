@@ -22,7 +22,7 @@ namespace Users.Tests.Common
             var configurationProvider = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new AssemblyMappingProfile(
-                    typeof(IUsersDbContext).Assembly));
+                    typeof(IDbContext).Assembly));
             });
             Mapper = configurationProvider.CreateMapper();
         }

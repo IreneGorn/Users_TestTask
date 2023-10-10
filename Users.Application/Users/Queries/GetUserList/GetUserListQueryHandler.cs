@@ -14,17 +14,17 @@ namespace Users.Application.Users.Queries.GetUserList
     public class GetUserListQueryHandler 
         : IRequestHandler<GetUserListQuery, UserListVm>
     {
-        private readonly IUsersDbContext _dbContext;
+        private readonly IDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetUserListQueryHandler(IUsersDbContext dbContext, IMapper mapper) =>
+        public GetUserListQueryHandler(IDbContext dbContext, IMapper mapper) =>
             (_dbContext, _mapper) = (dbContext, mapper);
 
         public async Task<UserListVm> Handle(GetUserListQuery request,
             CancellationToken cancellationToken)
         {
             var usersQuery = await _dbContext.Users
-                .Where(user => user.RoleId == request.RoleId)
+                .Where(user => user.Roles.Any(x => x.Id == request.RoleId))
                 .ProjectTo<UserLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 

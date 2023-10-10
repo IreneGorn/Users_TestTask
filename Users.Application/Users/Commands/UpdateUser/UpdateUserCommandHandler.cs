@@ -11,9 +11,9 @@ namespace Users.Application.Users.Commands.UpdateUser
     public class UpdateUserCommandHandler 
         : IRequestHandler<UpdateUserCommand>
     {
-        private readonly IUsersDbContext _dbContext;
+        private readonly IDbContext _dbContext;
 
-        public UpdateUserCommandHandler(IUsersDbContext dbContext) =>
+        public UpdateUserCommandHandler(IDbContext dbContext) =>
             _dbContext = dbContext;
 
         public async Task Handle(UpdateUserCommand request,
@@ -22,7 +22,7 @@ namespace Users.Application.Users.Commands.UpdateUser
             var entity = await _dbContext.Users.FirstOrDefaultAsync(user =>
                 user.Id == request.Id, cancellationToken);
 
-            if (entity == null || entity.RoleId != request.RoleId)
+            if (entity == null)
             {
                 throw new NotFoundException(nameof(User), request.Id);
             }

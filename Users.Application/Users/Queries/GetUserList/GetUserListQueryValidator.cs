@@ -13,7 +13,6 @@ namespace Users.Application.Users.Queries.GetUserList
         public GetUserListQueryValidator()
         {
             RuleFor(user => user.Id).NotEqual(Guid.Empty);
-            RuleFor(user => user.RoleId).NotEqual(Guid.Empty);
         }
     }
 }

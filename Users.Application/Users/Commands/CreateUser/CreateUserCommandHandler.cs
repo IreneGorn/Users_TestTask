@@ -6,9 +6,9 @@ namespace Users.Application.Users.Commands.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
     {
-        private readonly IUsersDbContext _dbContext;
+        private readonly IDbContext _dbContext;
 
-        public CreateUserCommandHandler(IUsersDbContext dbContext) => _dbContext = dbContext;
+        public CreateUserCommandHandler(IDbContext dbContext) => _dbContext = dbContext;
 
         public async Task<Guid> Handle(CreateUserCommand request,
             CancellationToken cancellationToken)
@@ -18,7 +18,7 @@ namespace Users.Application.Users.Commands.CreateUser
                 UserName = request.UserName,
                 Age = request.Age,
                 Email = request.Email,
-                RoleId = request.RoleId,
+                Roles = request.Roles,
                 Id = Guid.NewGuid()
             };
 

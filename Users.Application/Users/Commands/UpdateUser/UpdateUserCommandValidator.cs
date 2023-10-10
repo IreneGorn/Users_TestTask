@@ -16,7 +16,7 @@ namespace Users.Application.Users.Commands.UpdateUser
             RuleFor(createUserCommand =>
                 createUserCommand.Email).NotEmpty();
             RuleFor(createUserCommand =>
-                createUserCommand.RoleId).NotEqual(Guid.Empty);
+                createUserCommand.Roles).NotEmpty();
             RuleFor(createUserCommand =>
                 createUserCommand.Id).NotEqual(Guid.Empty);
         }

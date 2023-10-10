@@ -2,6 +2,7 @@
 using Users.Application.Common.Mapping;
 using Users.Application.Users.Commands.CreateUser;
 using Users.Application.Users.Commands.UpdateUser;
+using Users.Domain;
 
 namespace Users.WebApi.Models
 {
@@ -11,6 +12,8 @@ namespace Users.WebApi.Models
         public string UserName { get; set; }
         public int Age { get; set; }
         public string Email { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
+
 
         public void Mapping(Profile profile)
         {
@@ -22,7 +25,9 @@ namespace Users.WebApi.Models
                 .ForMember(userCommand => userCommand.Age,
                     opt => opt.MapFrom(userDto => userDto.Age))
                 .ForMember(userCommand => userCommand.Email,
-                    opt => opt.MapFrom(userDto => userDto.Email));
+                    opt => opt.MapFrom(userDto => userDto.Email))
+                .ForMember(userVm => userVm.Roles,
+                    opt => opt.MapFrom(user => user.Roles));
         }
     }
 }

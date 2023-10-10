@@ -9,6 +9,6 @@ namespace Users.Application.Users.Commands.UpdateUser
         public string? UserName { get; set; }
         public int? Age { get; set; }
         public string? Email { get; set; }
-        public Guid RoleId { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }

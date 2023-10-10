@@ -15,6 +15,7 @@ namespace Users.Application.Users.Queries.GetUserDetails
         public string? UserName { get; set; }
         public int? Age { get; set; }
         public string? Email { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -26,7 +27,9 @@ namespace Users.Application.Users.Queries.GetUserDetails
                 .ForMember(userVm => userVm.Age,
                     opt => opt.MapFrom(user => user.Age))
                 .ForMember(userVm => userVm.Email,
-                    opt => opt.MapFrom(user => user.Email));
+                    opt => opt.MapFrom(user => user.Email))
+                .ForMember(userVm => userVm.Roles,
+                    opt => opt.MapFrom(user => user.Roles));
         }
     }
 }

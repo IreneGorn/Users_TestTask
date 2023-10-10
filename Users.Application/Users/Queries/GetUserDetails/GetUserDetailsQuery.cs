@@ -11,6 +11,6 @@ namespace Users.Application.Users.Queries.GetUserDetails
     public class GetUserDetailsQuery : IRequest<UserDetailsVm>
     {
         public Guid Id { get; set; }
-        public Guid RoleId { get; set; }
+        public virtual ICollection<Role> Roles { get; set; } = new List<Role>();
     }
 }

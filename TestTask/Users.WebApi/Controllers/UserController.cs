@@ -6,6 +6,7 @@ using Users.Application.Users.Commands.DeleteCommand;
 using Users.Application.Users.Commands.UpdateUser;
 using Users.Application.Users.Queries.GetUserDetails;
 using Users.Application.Users.Queries.GetUserList;
+using Users.Domain;
 using Users.WebApi.Models;
 
 namespace Users.WebApi.Controllers
@@ -61,7 +62,6 @@ namespace Users.WebApi.Controllers
         {
             var query = new GetUserDetailsQuery
             {
-                RoleId = RoleId,
                 Id = id
             };
             var vm = await Mediator.Send(query);
@@ -88,7 +88,6 @@ namespace Users.WebApi.Controllers
         public async Task<ActionResult<Guid>> Create([FromBody] CreateUserDto createUserDto)
         {
             var command = _mapper.Map<CreateUserCommand>(createUserDto);
-            command.RoleId = RoleId;
             var userId = await Mediator.Send(command);
             return Ok(userId);  
         }
@@ -113,7 +112,6 @@ namespace Users.WebApi.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto)
         {
             var command = _mapper.Map<UpdateUserCommand>(updateUserDto);
-            command.RoleId = RoleId;
             await Mediator.Send(command);
             return NoContent();
         }
@@ -137,7 +135,6 @@ namespace Users.WebApi.Controllers
         {
             var command = new DeleteUserCommand
             {
-                RoleId = RoleId,
                 Id = id
             };
             await Mediator.Send(command);
